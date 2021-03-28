@@ -1,51 +1,52 @@
-import React from "react";
+import React ,{ useRef ,useState}from "react";
 import "./App.css"
 const API_KEY = '783d7891abed53ca9342294c08e42861'
-class App extends React.Component {
-    state = {
+export default function App () {
+    const [state , setState] = useState([{
         temp:undefined,
         city :undefined,
         country:undefined,
         error:undefined,
-    }
-    gettingWeather = async (e) => {
+    }])
+    const refHandler = useRef()
+    async function gettingWeather (e) {
         e.preventDefault()
-        const city = e.target.elements.city.value;
+        const city = refHandler.current.value;
+        refHandler.current.value = null;
         const api_url = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`)
         const data = await api_url.json()
-        if (data.name != null) {
-            this.setState({
-                temp:data.main.temp,
-                city:data.name,
-                country:data.sys.country,
-                error: "",
-            })
+        if (city) {
+            setState(
+                {
+                    temp:data.main.temp,
+                    city:data.name,
+                    country:data.sys.country,
+                    error: "",
+                })
         }
         else {
-            this.setState({
-                temp:undefined,
-                city :undefined,
-                country:undefined,
-                error:"Введите название города",
-            })
+            setState(
+                {
+                    temp:undefined,
+                    city :undefined,
+                    country:undefined,
+                    error:"Введите название города",
+                }
+            )
         }
     }
-    render() {
-        return (
-            <div className={"wid"}>
-                <h2>Узнать погоду в вашем городе</h2>
-                <form onSubmit={this.gettingWeather}>
-                    <input type="text" name="city" placeholder="Город"/>
-                    <button>Узнать погоду</button>
-                </form>
-                {this.state.city &&
-                <div>
-                    <p>Местоположение : {this.state.city} , {this.state.country}</p>
-                    <p>Температура:{this.state.temp}</p>
-                </div>}
-                <p>{this.state.error}</p>
-            </div>
-        )
-    }
+    return (
+        <div className={"wid"}>
+            <form>
+                <input type="text" name="city" placeholder="Город" ref={refHandler}/>
+                <button onClick={gettingWeather}>Узнать погоду</button>
+            </form>
+            {state.city &&
+            <div>
+                <p>Местоположение : {state.city} , {state.country}</p>
+                <p>Температура:{state.temp}</p>
+            </div>}
+            <p>{state.error}</p>
+        </div>
+    )
 }
-export default App
