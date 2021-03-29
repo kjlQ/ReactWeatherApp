@@ -13,7 +13,7 @@ export default function App () {
         e.preventDefault()
         const city = refHandler.current.value;
         refHandler.current.value = null;
-        const api_url = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`)
+        const api_url = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`)
         const data = await api_url.json()
         if (city) {
             setState(
