@@ -7,11 +7,6 @@
 .main {
     margin-top: 20px;
 }
-form button {
-    margin-left: 10px;
-    margin-top: 10px;
-    padding: 5px 10px;
-}
 .wid {
     margin:auto;
     text-align: center;
@@ -27,7 +22,8 @@ div p {
 }
 h1 {
     font-size: 22px;
-    margin: 10px 0;
+    text-align: center;
+    margin: 10px;
 }
 button {
     color: black;
@@ -35,6 +31,9 @@ button {
     border-radius: 20px;
     border:0px;
     cursor: pointer;
+    margin-top: 10px;
+    padding: 5px 10px;
+    margin-left: 10px;
 }
 button:hover {
     background-color: grey;
@@ -43,5 +42,13 @@ button:hover {
 @media (max-width: 768px) {
     .wid {
         width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+}
+@media (max-width: 400px) {
+    button {
+        margin-left: 0px;
     }
 }
