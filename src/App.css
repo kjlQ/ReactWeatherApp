@@ -1,11 +1,47 @@
 * {
-    margin: auto;
-    padding: 4px;
+    font-size: 20px;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+.main {
+    margin-top: 20px;
+}
+form button {
+    margin-left: 10px;
+    margin-top: 10px;
+    padding: 5px 10px;
 }
 .wid {
-    margin-top: 20px;
+    margin:auto;
     text-align: center;
-    width:400px;
-    background-color: royalblue;
+    width:600px;
+    background-color: peru;
     padding:10px;
+}
+.wid div {
+    padding: 4px;
+}
+div p {
+    padding-top: 10px;
+}
+h1 {
+    font-size: 22px;
+    margin: 10px 0;
+}
+button {
+    color: black;
+    background-color: #fff;
+    border-radius: 20px;
+    border:0px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: grey;
+    color: gold;
+}
+@media (max-width: 768px) {
+    .wid {
+        width: 100%;
+    }
 }

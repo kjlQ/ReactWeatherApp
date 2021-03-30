@@ -15,7 +15,7 @@ export default function App () {
         refHandler.current.value = null;
         const api_url = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`)
         const data = await api_url.json()
-        if (city) {
+        if (data.name) {
             setState(
                 {
                     temp:data.main.temp,
@@ -36,17 +36,20 @@ export default function App () {
         }
     }
     return (
-        <div className={"wid"}>
-            <form>
-                <input type="text" name="city" placeholder="Город" ref={refHandler}/>
-                <button onClick={gettingWeather}>Узнать погоду</button>
-            </form>
-            {state.city &&
-            <div>
-                <p>Местоположение : {state.city} , {state.country}</p>
-                <p>Температура:{state.temp}</p>
-            </div>}
-            <p>{state.error}</p>
+        <div className="main">
+            <div className={"wid"}>
+                <h1>Узнайте погоду в вашем городе</h1>
+                <form>
+                    <input type="text" name="city" placeholder="Город" ref={refHandler}/>
+                    <button onClick={gettingWeather}>Узнать погоду</button>
+                </form>
+                {state.city &&
+                <div>
+                    <p>Местоположение : {state.city} , {state.country} </p>
+                    <p>Температура:{state.temp} °C</p>
+                </div>}
+                <p>{state.error}</p>
+            </div>
         </div>
     )
 }
